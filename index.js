@@ -4,15 +4,15 @@ const MAX_DEPTH = 6
 
 const resolvers_filename = fs.readdirSync(__dirname + '/resolvers', { withFileTypes: true }).filter(n => n.isFile() && n.name.endsWith('.js')).map(n => `${__dirname}/resolvers/${n.name}`)
 
-const resolvers = {}
+const resolvers = []
 
 for (const r of resolvers_filename) {
     const { match, fn } = require(r)
-    resolvers[match] = fn
+    resolvers.push([match, fn])
 }
 
 function findAMatch(url) {
-    for (const [m, fn] in Object.entries(resolvers)) {
+    for (const [m, fn] of resolvers) {
         if (m.test(url)) return fn
     }
 }
