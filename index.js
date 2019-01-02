@@ -22,7 +22,7 @@ exports.resolve = async (link) => {
     affected_urls.push(link)
     let current_link = link
     for (let hasMatch = findAMatch(current_link); hasMatch;) {
-        if (affected_urls.indexOf(current_link) > -1) break
+        if (affected_urls.indexOf(current_link) > 0) break
         if (affected_urls.length > MAX_DEPTH) break
         const result = await hasMatch(current_link)
         if (!result) break

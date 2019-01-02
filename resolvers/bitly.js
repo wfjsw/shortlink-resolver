@@ -13,7 +13,8 @@ exports.fn = async (url) => {
         method: 'head',
         maxRedirects: 0,
         responseType: 'stream',
-        timeout: 5000
+        timeout: 5000,
+        validateStatus: () => true
     })
     if (result.status !== 301) return false
     cache.set(addrid, result.headers['location'])
